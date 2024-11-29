@@ -1,11 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/AskQueryPage.css";
 
 function AskQueryPage() {
   const [query, setQuery] = useState("");
   const [sqlQuery, setSqlQuery] = useState("");
   const [result, setResult] = useState("");
-  const [dataset, setDataset] = useState("Database 1");
+  const [dataset, setDataset] = useState("");
+  const [databases, setDatabases] = useState([]);
+  const [loadingDatabases, setLoadingDatabases] = useState(true);
+  const [error, setError] = useState("");
+
+  // Fetch the list of databases from the backend
+  useEffect(() => {
+    const fetchDatabases = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/databases"); // Backend endpoint for databases
+        const data = await response.json();
+        setDatabases(data.databases || []); // Assume the response contains a `databases` array
+        if (data.databases.length > 0) {
+          setDataset(data.databases[0]); // Default to the first database
+        }
+        setLoadingDatabases(false);
+      } catch (error) {
+        console.error("Error fetching databases:", error);
+        setError("Failed to load databases.");
+        setLoadingDatabases(false);
+      }
+    };
+
+    fetchDatabases();
+  }, []);
 
   const handleQuerySubmit = async () => {
     // Simulated Backend Request
@@ -42,11 +66,19 @@ function AskQueryPage() {
       <h2>Ask Query</h2>
       <div className="dataset-dropdown">
         <label>Select Database:</label>
-        <select value={dataset} onChange={(e) => setDataset(e.target.value)}>
-          <option value="Database 1">Database 1</option>
-          <option value="Database 2">Database 2</option>
-          <option value="Database 3">Database 3</option>
-        </select>
+        {loadingDatabases ? (
+          <p>Loading databases...</p>
+        ) : error ? (
+          <p className="error-message">{error}</p>
+        ) : (
+          <select value={dataset} onChange={(e) => setDataset(e.target.value)}>
+            {databases.map((db, index) => (
+              <option key={index} value={db}>
+                {db}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
       <div className="query-input-container">
         <label>Enter Query:</label>
@@ -59,7 +91,7 @@ function AskQueryPage() {
         <button
           className="submit-query-button"
           onClick={handleQuerySubmit}
-          disabled={!query.trim()}
+          disabled={!query.trim() || !dataset}
         >
           Submit
         </button>

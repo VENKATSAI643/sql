@@ -157,5 +157,27 @@ app.post('/upload', upload.single('file'), (req, res) => {
     }
 });
 
+
+// Endpoint: Fetch all databases
+app.get("/databases", async (req, res) => {
+    try {
+      // Query to fetch database names
+      db.query("SHOW DATABASES", (err, results) => {
+        if (err) {
+          console.error("Error fetching databases:", err);
+          return res.status(500).json({ message: "Failed to fetch databases.", error: err });
+        }
+  
+        // Extract database names from the query result
+        const databases = results.map((row) => row.Database);
+        res.json({ databases });
+      });
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      res.status(500).json({ message: "An unexpected error occurred.", error: err });
+    }
+  });
+  
+
 // Start server
 app.listen(5000, () => console.log('Server running on port 5000'));
