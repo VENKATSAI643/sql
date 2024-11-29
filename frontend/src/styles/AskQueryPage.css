@@ -1,0 +1,156 @@
+/* Container styling */
+.query-container {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Dataset dropdown styling */
+.dataset-dropdown {
+  margin-bottom: 20px;
+}
+
+.dataset-dropdown label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+  color: #555;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* Query input container */
+.query-input-container {
+  margin-bottom: 20px;
+}
+
+.query-input-container label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+  color: #555;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.submit-query-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-query-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.submit-query-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Query result styling */
+.query-result {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #e8f5e9;
+}
+
+.query-result h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.query-result pre {
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+}
+
+.query-result p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Reset query button styling */
+.reset-query-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reset-query-button:hover {
+  background-color: #218838;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .query-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .submit-query-button,
+  .reset-query-button {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+
+  input[type="text"],
+  select {
+    font-size: 16px;
+    padding: 10px;
+  }
+}
